@@ -1,0 +1,84 @@
+<?= $this->extend('default_layout') ?>
+
+<?= $this->section('head') ?>
+<link rel="stylesheet" href="<?= base_url('assets/dist/css/page/potal/reset_pass.css') ?>">
+<script src="<?= base_url('assets/js/page/potal/reset_pass.js') ?>" defer></script>
+<?= $this->endSection() ?>
+
+<?= $this->section('body') ?>
+<section class="text-center m-auto mt-5 content">
+    <img src="<?= base_url('assets/img/ctc_logo.png') ?>" alt="" class="logo">
+
+    <p class="h5 mt-3">
+        ระบบยืนยันตัวตนในการเข้าใช้งานอินเตอร์เน็ต
+        <br>
+        วิทยาลัยเทคนิคชัยภูมิ
+    </p>
+
+    <div class="card mt-5 mb-5 shadow-lg rounded-4">
+        <div class="card-body p-5">
+            <?php if (session()->getFlashdata('error')) : ?>
+                <div class="alert alert-danger" role="alert">
+                    <?= session()->getFlashdata('error') ?>
+                </div>
+            <?php endif; ?>
+            <?php if (isset($error)) : ?>
+                <div class="alert alert-danger" role="alert">
+                    <?= $error ?>
+                </div>
+            <?php endif; ?>
+            <h1 class="h3">แก้ไขรหัสผ่าน</h1>
+            <form action="" method="post" x-data="formResetPassword">
+                <?= csrf_field() ?>
+                <div class="text-start">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">ชื่อผู้ใช้</label>
+                        <input type="text" class="form-control" name="username" id="username" value="<?= set_value('username') ?>" :class="usernameClass" x-model="username" @input="usernameCheck">
+                        <div class="invalid-feedback">
+                            กรุณาป้อนชื่อผู้ใช้
+                        </div>
+                        <?= validation_show_error('username', 'show_error') ?>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">รหัสผ่านปัจุบัน</label>
+                        <input type="password" class="form-control " name="password" id="password" value="<?= set_value('password') ?>" :class="passwordClass" x-model="password" @input="passwordCheck">
+                        <div class="invalid-feedback">
+                            กรุณาป้อนรหัสผ่านปัจุบัน
+                        </div>
+                        <?= validation_show_error('password', 'show_error') ?>
+                    </div>
+                    <div class="mb-3">
+                        <label for="new_password" class="form-label">รหัสผ่านใหม่</label>
+                        <input type="password" class="form-control " name="new_password" id="new_password" value="<?= set_value('new_password') ?>" :class="newPasswordClass" x-model="newPassword" @input="newPasswordCheck">
+                        <div class="invalid-feedback">
+                            <ul>
+                                <li>ความยาวอย่างน้อย 8 ตัวอักษร</li>
+                                <!-- <li>ประกอบด้วยอักษรตัวพิมพ์ใหญ่อย่างน้อยหนึ่งตัว (<code>A-Z</code>)</li>
+                                <li>ประกอบด้วยอักษรตัวพิมพ์เล็กอย่างน้อยหนึ่งตัว (<code>a-z</code>)</li>
+                                <li>มีตัวเลขอย่างน้อยหนึ่งหลัก (<code>0-9</code>)</li>
+                                <li>มีอักขระพิเศษอย่างน้อยหนึ่งตัว (<code>!@#$%^&*()_+-=[]{};':"\\|,.<>/?</code>)</li> -->
+                            </ul>
+                        </div>
+                        <?= validation_show_error('new_password', 'show_error') ?>
+                    </div>
+                    <div class="mb-3">
+                        <label for="new_password_confirm" class="form-label">ยืนยันรหัสผ่านใหม่</label>
+                        <input type="password" class="form-control" name="new_password_confirm" id="new_password_confirm" value="<?= set_value('new_password_confirm') ?>" :class="newPasswordConfirmClass" x-model="newPasswordConfirm" @input="newPasswordConfirmCheck">
+                        <div class="invalid-feedback">
+                            ยืนยันรหัสผ่านใหม่ ไม่ตรงกับ รหัสผ่านใหม่
+                        </div>
+                        <?= validation_show_error('new_password_confirm', 'show_error') ?>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" type="submit" :disabled="notSubmit">บันทึก</button>
+
+                <p class="mt-5">
+                    <a href="">ลงชื่อเข้าใช้</a>
+                </p>
+            </form>
+        </div>
+
+    </div>
+</section>
+<?= $this->endSection() ?>
