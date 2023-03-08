@@ -74,7 +74,7 @@
                 <button class="btn btn-primary" type="submit" :disabled="notSubmit">บันทึก</button>
 
                 <p class="mt-5">
-                    <a href="">ลงชื่อเข้าใช้</a>
+                    <a href="<?= config('Firewall')->authURL ?>">ลงชื่อเข้าใช้</a>
                 </p>
             </form>
         </div>

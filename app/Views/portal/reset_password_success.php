@@ -19,7 +19,7 @@
             <img src="<?= base_url('assets/svg/success-svgrepo-com.svg') ?>" alt="" class="w-25">
             <h1 class="my-5 h1">เปลี่ยนรหัสผ่านสำเร็จ</h1>
             <div class="d-grid">
-                <a href="" class="btn btn-primary">
+                <a href="<?= config('Firewall')->authURL ?>" class="btn btn-primary">
                     ลงชื่อเข้าใช้
                 </a>
             </div>
