@@ -1,7 +1,7 @@
 <?= $this->extend('default_layout') ?>
 
 <?= $this->section('head') ?>
-<link rel="stylesheet" href="<?= base_url('assets/dist/css/page/potal/reset_pass.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/dist/css/page/potal/edit_pass.css') ?>">
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>

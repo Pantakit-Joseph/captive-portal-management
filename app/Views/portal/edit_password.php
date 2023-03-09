@@ -1,8 +1,8 @@
 <?= $this->extend('default_layout') ?>
 
 <?= $this->section('head') ?>
-<link rel="stylesheet" href="<?= base_url('assets/dist/css/page/potal/reset_pass.css') ?>">
-<script src="<?= base_url('assets/js/page/potal/reset_pass.js') ?>" defer></script>
+<link rel="stylesheet" href="<?= base_url('assets/dist/css/page/potal/edit_pass.css') ?>">
+<script src="<?= base_url('assets/js/page/potal/edit_pass.js') ?>" defer></script>
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
@@ -27,8 +27,8 @@
                     <?= $error ?>
                 </div>
             <?php endif; ?>
-            <h1 class="h3">แก้ไขรหัสผ่าน</h1>
-            <form action="" method="post" x-data="formResetPassword">
+            <h1 class="h3">เปลี่ยนรหัสผ่าน</h1>
+            <form action="" method="post" x-data="formEditPassword">
                 <?= csrf_field() ?>
                 <div class="text-start">
                     <div class="mb-3">

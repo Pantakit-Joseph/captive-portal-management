@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../../../src/scss/page/potal_reset_pass.scss"],"names":[],"mappings":"AAAA,KACI,wBAAA,CAGJ,SACI,eAAA,CAGJ,MACI,UAAA","file":"potal_reset_pass.css","sourcesContent":["body {\n    background-color: #f8f9fa;\n}\n\n.content {\n    max-width: 36rem;\n}\n\n.logo {\n    width: 7rem;\n}"]}

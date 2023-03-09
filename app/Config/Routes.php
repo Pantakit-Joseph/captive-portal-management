@@ -31,10 +31,10 @@ $routes->setAutoRoute(false);
 // route since we don't have to scan directories.
 // $routes->get('/', 'Home::index');
 
-$routes->get('/potal/reset-password', 'Portal\ResetPassword::index');
-$routes->post('/potal/reset-password', 'Portal\ResetPassword::action');
+$routes->get('/potal/edit-password', 'Portal\EditPassword::index');
+$routes->post('/potal/edit-password', 'Portal\EditPassword::action');
 
-$routes->get('/potal/reset-password/success', 'Portal\ResetPassword::success');
+$routes->get('/potal/edit-password/success', 'Portal\EditPassword::success');
 
 /*
  * --------------------------------------------------------------------

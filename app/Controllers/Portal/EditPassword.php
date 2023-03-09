@@ -4,11 +4,11 @@ namespace App\Controllers\Portal;
 
 use App\Controllers\BaseController;
 
-class ResetPassword extends BaseController
+class EditPassword extends BaseController
 {
     public function index()
     {
-        return view('portal/reset_password');
+        return view('portal/edit_password');
     }
 
     public function action() 
@@ -36,18 +36,18 @@ class ResetPassword extends BaseController
         ];
 
         if ($this->validate($rules)) {
-            $result = $radcheckModel->resetPassword($this->request->getPost());
+            $result = $radcheckModel->editPassword($this->request->getPost());
             if ($result['status']) {
-                return redirect()->to('/potal/reset-password/success');
+                return redirect()->to('/potal/edit-password/success');
             }
         }
 
-        return view('portal/reset_password', [
+        return view('portal/edit_password', [
             'error' => $result['msg']
         ]);
     }
 
     public function success() {
-        return view('portal/reset_password_success');
+        return view('portal/edit_password_success');
     }
 }

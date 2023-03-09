@@ -13,7 +13,7 @@ class Radcheck extends Model
     protected $useSoftDeletes   = false;
     protected $allowedFields    = ['value'];
 
-    public function resetPassword($data)
+    public function editPassword($data)
     {
         $check = $this->checkAuth($data['username'], $data['password']);
         if (!$check) {

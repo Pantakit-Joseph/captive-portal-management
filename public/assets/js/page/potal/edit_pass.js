@@ -1,6 +1,6 @@
 'use strict'
 document.addEventListener('alpine:init', () => {
-    Alpine.data('formResetPassword', () => ({
+    Alpine.data('formEditPassword', () => ({
         username: '',
         password: '',
         newPassword: '',
