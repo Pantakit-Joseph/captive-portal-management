@@ -2,7 +2,9 @@
 
 <?= $this->section('head') ?>
 <link rel="stylesheet" href="<?= base_url('assets/dist/css/page/potal/edit_pass.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/bootstrap-icons/bootstrap-icons.css') ?>">
 <script src="<?= base_url('assets/js/page/potal/edit_pass.js') ?>" defer></script>
+<script src="<?= base_url('assets/js/password-show-hide.js') ?>" defer></script>
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
@@ -49,23 +51,31 @@
                     </div>
                     <div class="mb-3">
                         <label for="new_password" class="form-label">รหัสผ่านใหม่</label>
-                        <input type="password" class="form-control " name="new_password" id="new_password" value="<?= set_value('new_password') ?>" :class="newPasswordClass" x-model="newPassword" @input="newPasswordCheck">
-                        <div class="invalid-feedback">
-                            <ul>
-                                <li>ความยาวอย่างน้อย 8 ตัวอักษร</li>
-                                <!-- <li>ประกอบด้วยอักษรตัวพิมพ์ใหญ่อย่างน้อยหนึ่งตัว (<code>A-Z</code>)</li>
+                        <div class="input-group has-validation" x-data="passwordShowHide">
+                            <input type="password" :type="type" class="form-control " name="new_password" id="new_password" value="<?= set_value('new_password') ?>" :class="newPasswordClass" x-model="newPassword" @input="newPasswordCheck">
+                            <span class="input-group-text" :class='icon' @click='toggle' @mouseover="cursorPointer">
+                            </span>
+                            <div class="invalid-feedback">
+                                <ul>
+                                    <li>ความยาวอย่างน้อย 8 ตัวอักษร</li>
+                                    <!-- <li>ประกอบด้วยอักษรตัวพิมพ์ใหญ่อย่างน้อยหนึ่งตัว (<code>A-Z</code>)</li>
                                 <li>ประกอบด้วยอักษรตัวพิมพ์เล็กอย่างน้อยหนึ่งตัว (<code>a-z</code>)</li>
                                 <li>มีตัวเลขอย่างน้อยหนึ่งหลัก (<code>0-9</code>)</li>
                                 <li>มีอักขระพิเศษอย่างน้อยหนึ่งตัว (<code>!@#$%^&*()_+-=[]{};':"\\|,.<>/?</code>)</li> -->
-                            </ul>
+                                </ul>
+                            </div>
                         </div>
                         <?= validation_show_error('new_password', 'show_error') ?>
                     </div>
                     <div class="mb-3">
                         <label for="new_password_confirm" class="form-label">ยืนยันรหัสผ่านใหม่</label>
-                        <input type="password" class="form-control" name="new_password_confirm" id="new_password_confirm" value="<?= set_value('new_password_confirm') ?>" :class="newPasswordConfirmClass" x-model="newPasswordConfirm" @input="newPasswordConfirmCheck">
-                        <div class="invalid-feedback">
-                            ยืนยันรหัสผ่านใหม่ ไม่ตรงกับ รหัสผ่านใหม่
+                        <div class="input-group has-validation" x-data="passwordShowHide">
+                            <input type="password" :type="type" class="form-control" name="new_password_confirm" id="new_password_confirm" value="<?= set_value('new_password_confirm') ?>" :class="newPasswordConfirmClass" x-model="newPasswordConfirm" @input="newPasswordConfirmCheck">
+                            <span class="input-group-text" :class='icon' @click='toggle' @mouseover="cursorPointer">
+                            </span>
+                            <div class="invalid-feedback">
+                                ยืนยันรหัสผ่านใหม่ ไม่ตรงกับ รหัสผ่านใหม่
+                            </div>
                         </div>
                         <?= validation_show_error('new_password_confirm', 'show_error') ?>
                     </div>
