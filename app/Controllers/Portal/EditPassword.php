@@ -40,11 +40,13 @@ class EditPassword extends BaseController
             if ($result['status']) {
                 return redirect()->to('/potal/edit-password/success');
             }
+
+            return view('portal/edit_password', [
+                'error' => $result['msg']
+            ]);
         }
 
-        return view('portal/edit_password', [
-            'error' => $result['msg']
-        ]);
+        return view('portal/edit_password');
     }
 
     public function success() {

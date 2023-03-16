@@ -29,12 +29,20 @@ $routes->setAutoRoute(false);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-// $routes->get('/', 'Home::index');
+$routes->get('/', 'Home::index');
 
-$routes->get('/potal/edit-password', 'Portal\EditPassword::index');
-$routes->post('/potal/edit-password', 'Portal\EditPassword::action');
+$routes->group('potal', ['namespace' => 'App\Controllers\Portal'], static function ($routes) {
+    $routes->get('edit-password', 'EditPassword::index');
+    $routes->post('edit-password', 'EditPassword::action');
+    $routes->get('edit-password/success', 'EditPassword::success');
+});
 
-$routes->get('/potal/edit-password/success', 'Portal\EditPassword::success');
+$routes->group('auth', static function ($routes) {
+    $routes->get('login', 'Auth::login');
+    $routes->post('login', 'Auth::loginAction');
+});
+
+$routes->get('/test/app', 'Test::app');
 
 /*
  * --------------------------------------------------------------------
