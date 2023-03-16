@@ -1,0 +1,142 @@
+@import "bootstrap/scss/functions";
+
+@import "bootstrap/scss/variables";
+
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/root";
+
+
+@import "bootstrap/scss/bootstrap";
+
+$topbar-height: 4rem;
+$leftbar-width: 16rem;
+$menu-item-padding-x: .75rem;
+$menu-item-padding-y: .875rem;
+$logo-height: 2rem;
+
+$menu-item-font-size: .875rem;
+$menu-item-color: $gray-900;
+$menu-item-active-color: $primary;
+$menu-item-icon-size: 1.2rem;
+
+body {
+    overflow-x: hidden;
+    background-color: $gray-100;
+}
+
+.wrapper {
+    height: 100%;
+    width: 100%;
+}
+
+.navbar {
+    min-height: $topbar-height;
+    margin-left: $leftbar-width;
+    background-color: $white;
+}
+
+.navbar-logo-img {
+    width: auto;
+    height: 2rem;
+}
+
+.btn-toggle-menu {
+    font-size: 1.5rem;
+    border: none !important;
+}
+
+.arrow-none {
+    &::after {
+        display: none;
+    }
+}
+
+.account-user-avatar {
+    width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+}
+
+.account-user-name {
+    font-size: .875rem;
+    line-height: 1.1;
+}
+
+.account-user-type {
+    font-size: .75rem;
+    line-height: 1.1;
+}
+
+.leftside-menu {
+    z-index: 1000;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: $leftbar-width;
+    min-width: $leftbar-width;
+    height: 100%;
+    min-height: 100%;
+    background-color: $white;
+}
+
+.leftside-logo {
+    display: block;
+    position: sticky;
+    text-align: center;
+    padding: 0, $menu-item-padding-x;
+    line-height: $topbar-height;
+
+    img {
+        height: $logo-height;
+    }
+}
+
+.side-nav {
+    padding: 0;
+    list-style-type: none;
+
+    .side-nav-title {
+        pointer-events: none;
+        cursor: default;
+        white-space: nowrap;
+        // color: var(--ct-menu-item-color);
+        font-weight: 700;
+        font-size: $menu-item-font-size;
+        padding: $menu-item-padding-y $menu-item-padding-x;
+    }
+
+    .side-nav-link {
+        display: block;
+        list-style: none;
+        position: relative;
+        white-space: nowrap;
+        color: $menu-item-color;
+        transition: all .25s ease-in-out;
+        font-size: $menu-item-font-size;
+        padding: $menu-item-padding-y $menu-item-padding-x;
+        
+        i {
+            display: inline-block;
+            text-align: center;
+            font-size: $menu-item-icon-size;
+            line-height: $menu-item-icon-size;
+            width: $menu-item-padding-x * 4;
+            min-width: $menu-item-padding-x * 4;
+        }
+
+        * {
+            vertical-align: middle;
+        }
+    }
+
+    .menuitem-active>a {
+        color: $menu-item-active-color;
+        font-weight: 500;
+    }
+
+    a {
+        text-decoration: none;
+    }
+}

@@ -1,0 +1,1 @@
+{"version":3,"sourceRoot":"","sources":["../../../../../../src/scss/app/vendors/simplebar.scss"],"names":[],"mappings":"AAAA,mBACE,aACA,sBACA","file":"simplebar.css","sourcesContent":[".simplebar-content {\n  display: flex;\n  flex-direction: column;\n  min-height: 100%;\n}\n"]}
