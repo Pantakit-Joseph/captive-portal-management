@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/coreui-template/css/vendors/simplebar.css') ?>">
 
     <link href="<?= base_url('assets/dist/css/app/style.css') ?>" rel="stylesheet">
-    <link rel="stylesheet" href="<?= base_url('assets/bootstrap-icons/bootstrap-icons.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/icons-pro/css/all.min.css') ?>">
 
     <script src="<?= base_url('assets/coreui/js/coreui.bundle.min.js') ?>" defer></script>
     <script src="<?= base_url('assets/coreui-template/vendors/simplebar/js/simplebar.min.js') ?>" defer></script>
@@ -27,8 +27,8 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="card-group d-block d-md-flex row">
-                        <?= view_cell('AlertErrors', [
-                            'errors' => $errors ?? null
+                        <?= view_cell('AlertError', [
+                            'errors' => $error ?? null
                         ]) ?>
                         <div class="card col-md-7 p-4 mb-0">
                             <div class="card-body">
@@ -38,7 +38,7 @@
                                     <?= csrf_field() ?>
                                     <div class="input-group">
                                         <span class="input-group-text">
-                                            <i class="bi bi-person"></i>
+                                            <i class="icon cil-user"></i>
                                         </span>
                                         <input class="form-control" type="text" name="username" value="<?= set_value('username') ?>" placeholder="ชื่อผู้ใช้">
                                     </div>
@@ -46,11 +46,11 @@
 
                                     <div class="input-group mt-3" x-data="passwordShowHide">
                                         <span class="input-group-text">
-                                            <i class="bi bi-lock"></i>
+                                            <i class="icon cil-lock-locked"></i>
                                         </span>
                                         <input class="form-control" type="password" :type="type" name="password" value="<?= set_value('password') ?>" placeholder="รหัสผ่าน">
                                         <span class="input-group-text" @click='toggle' @mouseover="cursorPointer">
-                                            <i :class="icon"></i>
+                                            <i class="icon" :class="iconPro"></i>
                                         </span>
                                     </div>
                                     <?= validation_show_error('password', 'show_error') ?>

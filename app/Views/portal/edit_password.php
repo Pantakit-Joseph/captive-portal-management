@@ -1,9 +1,9 @@
 <?= $this->extend('default_layout') ?>
 
 <?= $this->section('head') ?>
-<link rel="stylesheet" href="<?= base_url('assets/dist/css/page/potal/edit_pass.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/dist/css/page/portal/portal.css') ?>">
 <link rel="stylesheet" href="<?= base_url('assets/bootstrap-icons/bootstrap-icons.css') ?>">
-<script src="<?= base_url('assets/js/page/potal/edit_pass.js') ?>" defer></script>
+<script src="<?= base_url('assets/js/page/portal/edit_pass.js') ?>" defer></script>
 <script src="<?= base_url('assets/js/password-show-hide.js') ?>" defer></script>
 <?= $this->endSection() ?>
 
@@ -19,16 +19,9 @@
 
     <div class="card mt-5 mb-5 shadow-lg rounded-4">
         <div class="card-body p-5">
-            <?php if (session()->getFlashdata('error')) : ?>
-                <div class="alert alert-danger" role="alert">
-                    <?= session()->getFlashdata('error') ?>
-                </div>
-            <?php endif; ?>
-            <?php if (isset($error)) : ?>
-                <div class="alert alert-danger" role="alert">
-                    <?= $error ?>
-                </div>
-            <?php endif; ?>
+            <?= view_cell('AlertError', [
+                'error' => $error ?? null
+            ]) ?>
             <h1 class="h3">เปลี่ยนรหัสผ่าน</h1>
             <form action="" method="post" x-data="formEditPassword">
                 <?= csrf_field() ?>
@@ -43,9 +36,13 @@
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">รหัสผ่านปัจุบัน</label>
-                        <input type="password" class="form-control " name="password" id="password" value="<?= set_value('password') ?>" :class="passwordClass" x-model="password" @input="passwordCheck">
-                        <div class="invalid-feedback">
-                            กรุณาป้อนรหัสผ่านปัจุบัน
+                        <div class="input-group has-validation" x-data="passwordShowHide">
+                            <input type="password" :type="type" class="form-control " name="password" id="password" value="<?= set_value('password') ?>" :class="passwordClass" x-model="password" @input="passwordCheck">
+                            <i class="input-group-text bi" :class='icon' @click='toggle' @mouseover="cursorPointer"></i>
+
+                            <div class="invalid-feedback">
+                                กรุณาป้อนรหัสผ่านปัจุบัน
+                            </div>
                         </div>
                         <?= validation_show_error('password', 'show_error') ?>
                     </div>
@@ -53,8 +50,7 @@
                         <label for="new_password" class="form-label">รหัสผ่านใหม่</label>
                         <div class="input-group has-validation" x-data="passwordShowHide">
                             <input type="password" :type="type" class="form-control " name="new_password" id="new_password" value="<?= set_value('new_password') ?>" :class="newPasswordClass" x-model="newPassword" @input="newPasswordCheck">
-                            <span class="input-group-text" :class='icon' @click='toggle' @mouseover="cursorPointer">
-                            </span>
+                            <i class="input-group-text bi" :class='icon' @click='toggle' @mouseover="cursorPointer"></i>
                             <div class="invalid-feedback">
                                 <ul>
                                     <li>ความยาวอย่างน้อย 8 ตัวอักษร</li>
@@ -69,13 +65,9 @@
                     </div>
                     <div class="mb-3">
                         <label for="new_password_confirm" class="form-label">ยืนยันรหัสผ่านใหม่</label>
-                        <div class="input-group has-validation" x-data="passwordShowHide">
-                            <input type="password" :type="type" class="form-control" name="new_password_confirm" id="new_password_confirm" value="<?= set_value('new_password_confirm') ?>" :class="newPasswordConfirmClass" x-model="newPasswordConfirm" @input="newPasswordConfirmCheck">
-                            <span class="input-group-text" :class='icon' @click='toggle' @mouseover="cursorPointer">
-                            </span>
-                            <div class="invalid-feedback">
-                                ยืนยันรหัสผ่านใหม่ ไม่ตรงกับ รหัสผ่านใหม่
-                            </div>
+                        <input type="password" class="form-control" name="new_password_confirm" id="new_password_confirm" value="<?= set_value('new_password_confirm') ?>" :class="newPasswordConfirmClass" x-model="newPasswordConfirm" @input="newPasswordConfirmCheck">
+                        <div class="invalid-feedback">
+                            ยืนยันรหัสผ่านใหม่ ไม่ตรงกับ รหัสผ่านใหม่
                         </div>
                         <?= validation_show_error('new_password_confirm', 'show_error') ?>
                     </div>

@@ -38,7 +38,7 @@ class EditPassword extends BaseController
         if ($this->validate($rules)) {
             $result = $radcheckModel->editPassword($this->request->getPost());
             if ($result['status']) {
-                return redirect()->to('/potal/edit-password/success');
+                return redirect()->to('/portal/edit-password/success');
             }
 
             return view('portal/edit_password', [

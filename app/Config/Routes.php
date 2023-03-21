@@ -31,16 +31,31 @@ $routes->setAutoRoute(false);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
-$routes->group('potal', ['namespace' => 'App\Controllers\Portal'], static function ($routes) {
+$routes->group('portal', ['namespace' => 'App\Controllers\Portal'], static function ($routes) {
     $routes->get('edit-password', 'EditPassword::index');
     $routes->post('edit-password', 'EditPassword::action');
     $routes->get('edit-password/success', 'EditPassword::success');
+    $routes->get('issue', 'Issue::index');
 });
 
 $routes->group('auth', static function ($routes) {
     $routes->get('login', 'Auth::login');
     $routes->post('login', 'Auth::loginAction');
+    $routes->get('logout', 'Auth::logout');
 });
+
+$routes->group(
+    'admin',
+    [
+        'namespace' => 'App\Controllers\Admin',
+        'filter' => 'login:admin'
+    ],
+    static function ($routes) {
+        $routes->addRedirect('/', site_url('admin/home'));
+        $routes->get('home', 'Home::index');
+    }
+);
+
 
 $routes->get('/test/app', 'Test::app');
 

@@ -1,7 +1,7 @@
 <?= $this->extend('default_layout') ?>
 
 <?= $this->section('head') ?>
-<link rel="stylesheet" href="<?= base_url('assets/dist/css/page/potal/edit_pass.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/dist/css/page/portal/portal.css') ?>">
 <?= $this->endSection() ?>
 
 <?= $this->section('body') ?>
@@ -16,6 +16,9 @@
 
     <div class="card mt-5 mb-5 shadow-lg rounded-4">
         <div class="card-body p-5">
+            <?= view_cell('AlertError', [
+                'error' => $error ?? null
+            ]) ?>
             <img src="<?= base_url('assets/svg/success-svgrepo-com.svg') ?>" alt="" class="w-25">
             <h1 class="my-5 h1">เปลี่ยนรหัสผ่านสำเร็จ</h1>
             <div class="d-grid">
