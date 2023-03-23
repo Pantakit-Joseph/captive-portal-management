@@ -35,7 +35,7 @@ $routes->group('portal', ['namespace' => 'App\Controllers\Portal'], static funct
     $routes->get('edit-password', 'EditPassword::index');
     $routes->post('edit-password', 'EditPassword::action');
     $routes->get('edit-password/success', 'EditPassword::success');
-    $routes->get('issue', 'Issue::index');
+    $routes->get('issues/new', 'IssuesNew::index');
 });
 
 $routes->group('auth', static function ($routes) {

@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/coreui-template/css/vendors/simplebar.css') ?>">
     <!-- Main styles for this application-->
     <link href="<?= base_url('assets/dist/css/app/style.css') ?>" rel="stylesheet">
-    <link rel="stylesheet" href="<?= base_url('assets/coreui-icons/css/free.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/icons-pro/css/all.min.css') ?>">
     <!-- We use those styles to show code examples, you should remove them in your application.-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism.css">
     <link href="<?= base_url('assets/coreui-template/css/examples.css') ?>" rel="stylesheet">
