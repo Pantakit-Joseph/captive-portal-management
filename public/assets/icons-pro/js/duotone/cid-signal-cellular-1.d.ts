@@ -1,1 +1,0 @@
-export declare const cidSignalCellular1: any[];

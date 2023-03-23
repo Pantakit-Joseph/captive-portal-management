@@ -1,1 +1,0 @@
-export declare const cilBatteryAlt1: any[];

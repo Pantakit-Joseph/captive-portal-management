@@ -1,1 +1,0 @@
-export declare const cidTextStrike: any[];

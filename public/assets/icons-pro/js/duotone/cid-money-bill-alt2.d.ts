@@ -1,1 +1,0 @@
-export declare const cidMoneyBillAlt2: any[];

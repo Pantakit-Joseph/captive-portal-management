@@ -1,1 +1,0 @@
-export declare const cidBatteryAlt3: any[];

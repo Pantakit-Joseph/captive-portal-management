@@ -1,5 +1,0 @@
-export * from './brand/index'
-export * from './duotone/index'
-export * from './flag/index'
-export * from './linear/index'
-export * from './solid/index'
