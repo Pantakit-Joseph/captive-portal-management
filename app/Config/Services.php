@@ -24,7 +24,7 @@ class Services extends BaseService
         if ($getShared) {
             return static::getSharedInstance('auth');
         }
-        
+
         return new \App\Libraries\Auth();
     }
 

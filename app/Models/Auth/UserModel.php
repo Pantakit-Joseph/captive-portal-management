@@ -18,7 +18,7 @@ class UserModel extends Model
         'password',
         'user_type',
         'status',
-        'deleted_at'
+        'deleted_at',
     ];
 
     // Dates
@@ -27,7 +27,6 @@ class UserModel extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
-
 
     public function getByUsername($username)
     {

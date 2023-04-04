@@ -14,23 +14,23 @@ class CreateIssueTables extends Migration
                 'type'           => 'int',
                 'constraint'     => 11,
                 'unsigned'       => true,
-                'auto_increment' => true
+                'auto_increment' => true,
             ],
             'type_name' => [
-                'type' => 'varchar',
+                'type'       => 'varchar',
                 'constraint' => 30,
             ],
             'created_at' => [
                 'type' => 'datetime',
-                'null' => true
+                'null' => true,
             ],
-            'updated_at'     => [
+            'updated_at' => [
                 'type' => 'datetime',
-                'null' => true
+                'null' => true,
             ],
-            'deleted_at'     => [
+            'deleted_at' => [
                 'type' => 'datetime',
-                'null' => true
+                'null' => true,
             ],
         ]);
         $this->forge->addPrimaryKey('id');
@@ -41,7 +41,7 @@ class CreateIssueTables extends Migration
                 'type'           => 'int',
                 'constraint'     => 11,
                 'unsigned'       => true,
-                'auto_increment' => true
+                'auto_increment' => true,
             ],
             'firstname' => [
                 'type'       => 'varchar',
@@ -54,56 +54,56 @@ class CreateIssueTables extends Migration
             'email' => [
                 'type'       => 'varchar',
                 'constraint' => 255,
-                'null'       => true
+                'null'       => true,
             ],
             'tel' => [
                 'type'       => 'int',
                 'constraint' => 10,
-                'null'       => true
+                'null'       => true,
             ],
             'title' => [
                 'type'       => 'varchar',
                 'constraint' => 50,
-                'null'       => true
+                'null'       => true,
             ],
             'details' => [
                 'type' => 'text',
-                'null' => true
+                'null' => true,
             ],
             'type_id' => [
                 'type'       => 'int',
                 'constraint' => 11,
                 'unsigned'   => true,
-                'null'       => true
+                'null'       => true,
             ],
             'comment' => [
                 'type' => 'text',
-                'null' => true
+                'null' => true,
             ],
             'status' => [
-                'type' => 'int',
+                'type'       => 'int',
                 'constraint' => 1,
                 'default'    => 1,
-                'null' => true,
-                'comment' => "1=เปิดปัญหา, 0=ปิดปัญหา"
+                'null'       => true,
+                'comment'    => '1=เปิดปัญหา, 0=ปิดปัญหา',
             ],
             'closed_by' => [
-                'type'           => 'int',
-                'constraint'     => 11,
-                'unsigned'       => true,
-                'null' => true
+                'type'       => 'int',
+                'constraint' => 11,
+                'unsigned'   => true,
+                'null'       => true,
             ],
             'created_at' => [
                 'type' => 'datetime',
-                'null' => true
+                'null' => true,
             ],
-            'updated_at'     => [
+            'updated_at' => [
                 'type' => 'datetime',
-                'null' => true
+                'null' => true,
             ],
-            'deleted_at'     => [
+            'deleted_at' => [
                 'type' => 'datetime',
-                'null' => true
+                'null' => true,
             ],
         ]);
         $this->forge->addPrimaryKey('id');
@@ -116,7 +116,7 @@ class CreateIssueTables extends Migration
                 'type'           => 'int',
                 'constraint'     => 11,
                 'unsigned'       => true,
-                'auto_increment' => true
+                'auto_increment' => true,
             ],
             'issue_id' => [
                 'type'       => 'int',
@@ -126,7 +126,7 @@ class CreateIssueTables extends Migration
             'file' => [
                 'type'       => 'varchar',
                 'constraint' => 255,
-            ]
+            ],
         ]);
         $this->forge->addPrimaryKey('id');
         $this->forge->addForeignKey('issue_id', 'app_issues', 'id', '', 'CASCADE');
@@ -135,25 +135,30 @@ class CreateIssueTables extends Migration
         $this->db->table('app_issue_types')
             ->insertBatch([
                 [
-                    'type_name' => 'ไม่สามารถเข้าสู่ระบบได้',
-                    'created_at' => new RawSql('NOW()')
+                    'type_name'  => 'ไม่สามารถเข้าสู่ระบบได้',
+                    'created_at' => new RawSql('NOW()'),
+                    'updated_at' => new RawSql('NOW()'),
                 ],
                 [
-                    'type_name' => 'ข้อผิดพลาด (เว็บ)',
-                    'created_at' => new RawSql('NOW()')
+                    'type_name'  => 'ข้อผิดพลาด (เว็บ)',
+                    'created_at' => new RawSql('NOW()'),
+                    'updated_at' => new RawSql('NOW()'),
                 ],
                 [
-                    'type_name' => 'ข้อผิดพลาดบนมือถือ (Android)',
-                    'created_at' => new RawSql('NOW()')
+                    'type_name'  => 'ข้อผิดพลาดบนมือถือ (Android)',
+                    'created_at' => new RawSql('NOW()'),
+                    'updated_at' => new RawSql('NOW()'),
                 ],
                 [
-                    'type_name' => 'ข้อผิดพลาดบนมือถือ (iOS)',
-                    'created_at' => new RawSql('NOW()')
+                    'type_name'  => 'ข้อผิดพลาดบนมือถือ (iOS)',
+                    'created_at' => new RawSql('NOW()'),
+                    'updated_at' => new RawSql('NOW()'),
                 ],
                 [
-                    'type_name' => 'ข้อผิดพลาดอื่น',
-                    'created_at' => new RawSql('NOW()')
-                ]
+                    'type_name'  => 'ข้อผิดพลาดอื่น',
+                    'created_at' => new RawSql('NOW()'),
+                    'updated_at' => new RawSql('NOW()'),
+                ],
 
             ]);
     }

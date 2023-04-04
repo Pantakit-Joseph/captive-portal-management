@@ -17,11 +17,12 @@
 
     <div class="card mt-5 mb-5 shadow-lg rounded-4">
         <div class="card-body p-5">
-            <?= view_cell('AlertError', [
-                'error' => $error ?? null
+            <?= view_cell('AlertFeedback', [
+                'error'   => $error ?? null,
+                'success' => $success ?? null,
             ]) ?>
             <h1 class="h3">รายงานปัญหา</h1>
-            <form action="" method="post" x-data="formEditPassword">
+            <form action="" method="post" enctype="multipart/form-data">
                 <?= csrf_field() ?>
                 <div class="text-start">
                     <div class="row g-3 mb-3">
@@ -68,7 +69,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="details" class="form-label">รายละเอียด</label>
-                        <textarea name="details" id="details" class="form-control" value="<?= set_value('details') ?>"></textarea>
+                        <textarea name="details" rows="5" id="details" class="form-control" value=""><?= set_value('details') ?></textarea>
                         <div class="invalid-feedback">
                             กรุณาป้อนรายละเอียด
                         </div>
@@ -78,13 +79,17 @@
                         <label for="type" class="form-label">ประเภทของปัญหา</label>
                         <select name="type" id="type" class="form-select">
                             <option value="" selected disabled>เลือกหนี่งรายการ</option>
+                            <?php foreach ($data->types as $type) : ?>
+                                <option value="<?= $type['id'] ?>" <?= set_select('type', $type['id']) ?>><?= esc($type['type_name']) ?></option>
+                            <?php endforeach ?>
                         </select>
                         <?= validation_show_error('type', 'show_error') ?>
                     </div>
                     <div class="mb-3">
-                        <label for="file" class="form-label">รายละเอียด</label>
-                        <input type="file" class="form-control" name="file" id="file" value="<?= set_value('file') ?>">
-                        <?= validation_show_error('details', 'show_error') ?>
+                        <label for="file" class="form-label">ไฟล์</label>
+                        <input type="file" class="form-control mb-2" name="file[]" id="file">
+                        <input type="file" class="form-control mb-2" name="file[]" id="file">
+                        <?= validation_show_error('file', 'show_error') ?>
                     </div>
                 </div>
 

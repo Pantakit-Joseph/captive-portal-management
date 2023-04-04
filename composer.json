@@ -10,6 +10,7 @@
         "codeigniter4/translations": "^4.3"
     },
     "require-dev": {
+        "codeigniter/coding-standard": "^1.7",
         "fakerphp/faker": "^1.9",
         "mikey179/vfsstream": "^1.6",
         "phpunit/phpunit": "^9.1"
@@ -30,7 +31,8 @@
         }
     },
     "scripts": {
-        "test": "phpunit"
+        "test": "phpunit",
+        "fix": "vendor/bin/php-cs-fixer fix"
     },
     "support": {
         "forum": "https://forum.codeigniter.com/",

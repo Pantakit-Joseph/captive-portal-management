@@ -16,8 +16,11 @@
 
     <div class="card mt-5 mb-5 shadow-lg rounded-4">
         <div class="card-body p-5">
-            <?= view_cell('AlertError', [
-                'error' => $error ?? null
+            <?= view_cell('AlertFeedback', [
+                'error'   => $error ?? null,
+                'success' => $success ?? null,
+                'warning' => $warning ?? null,
+                'info'    => $info ?? null,
             ]) ?>
             <img src="<?= base_url('assets/svg/success-svgrepo-com.svg') ?>" alt="" class="w-25">
             <h1 class="my-5 h1">เปลี่ยนรหัสผ่านสำเร็จ</h1>

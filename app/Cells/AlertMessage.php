@@ -8,6 +8,5 @@ class AlertMessage extends Cell
 {
     public $type;
     public $message;
-
     protected string $view = 'alert_message_cell';
 }

@@ -2,8 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Controllers\BaseController;
-
 class Auth extends BaseController
 {
     private $auth;
@@ -23,18 +21,18 @@ class Auth extends BaseController
         $rules = [
             'username' => [
                 'label' => 'ชื่อผู้ใช้',
-                'rules' => 'required'
+                'rules' => 'required',
             ],
             'password' => [
                 'label' => 'รหัสผ่าน',
-                'rules' => 'required'
-            ]
+                'rules' => 'required',
+            ],
         ];
 
         if ($this->validate($rules)) {
             $username = $this->request->getPost('username');
             $password = $this->request->getPost('password');
-            $login = $this->auth->login($username, $password);
+            $login    = $this->auth->login($username, $password);
 
             if ($login['success']) {
                 return $this->redirect(user('user_type'));
@@ -42,13 +40,14 @@ class Auth extends BaseController
         }
 
         return view('auth/login.php', [
-            'error' => $login['reason'] ?? null
+            'error' => $login['reason'] ?? null,
         ]);
     }
 
     public function logout()
     {
         $this->auth->logout();
+
         return redirect('auth/login');
     }
 
@@ -58,6 +57,7 @@ class Auth extends BaseController
             case 'admin':
                 return redirect()->to('admin/home');
                 break;
+
             default:
                 return redirect()->to('auth/login')->with('error', 'เปลี่ยนเส้นทางไม่ถูกต้อง');
                 break;

@@ -2,13 +2,10 @@
 
 namespace App\Libraries;
 
-use Exception;
-
 class Auth
 {
     public $user;
     public $isLogin = false;
-
     private $userModel;
 
     public function __construct()
@@ -19,10 +16,10 @@ class Auth
     public function login($username, $password)
     {
         $user = $this->userModel->getByUsername($username);
-        if (!isset($user)) {
+        if (! isset($user)) {
             return [
                 'success' => false,
-                'reason' => 'ไม่พบบัญชีผู้ใช้'
+                'reason'  => 'ไม่พบบัญชีผู้ใช้',
             ];
         }
 
@@ -30,7 +27,7 @@ class Auth
         if ($passwordValid === false) {
             return [
                 'success' => false,
-                'reason' => 'รหัสผ่านไม่ถูกต้อง'
+                'reason'  => 'รหัสผ่านไม่ถูกต้อง',
             ];
         }
 
@@ -45,20 +42,20 @@ class Auth
 
         return [
             'success' => true,
-            'reason' => null,
+            'reason'  => null,
         ];
     }
 
     public function checkLogin($user_types = null)
     {
         $user_id = session()->get('user_id');
-        if (!isset($user_id)) {
+        if (! isset($user_id)) {
             return false;
         }
 
-        $user = $this->userModel->find($user_id);
+        $user       = $this->userModel->find($user_id);
         $this->user = $user;
-        if (!isset($user)) {
+        if (! isset($user)) {
             return false;
         }
 
@@ -68,12 +65,13 @@ class Auth
         }
 
         if ($user_types !== null) {
-            if (!in_array($user['user_type'], $user_types)) {
+            if (! in_array($user['user_type'], $user_types, true)) {
                 return false;
             }
         }
 
         $this->isLogin = true;
+
         return true;
     }
 
@@ -88,6 +86,7 @@ class Auth
             case 'admin':
                 return 'ผู้ดูแลระบบ';
                 break;
+
             default:
                 return $user_type;
                 break;
@@ -98,23 +97,26 @@ class Auth
     {
         if ($status !== '1') {
             $message = null;
+
             switch ($status) {
                 case '-1':
                     $message = 'บัญชีถูกระงับการใช้งาน';
                     break;
+
                 default:
                     $message = 'บัญชีไม่สามารถใช้งานได้';
                     break;
             }
+
             return [
                 'success' => false,
-                'reason' => $message
+                'reason'  => $message,
             ];
         }
 
         return [
             'success' => true,
-            'reason' => null,
+            'reason'  => null,
         ];
     }
 }

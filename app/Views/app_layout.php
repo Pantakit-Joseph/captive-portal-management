@@ -6,7 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
+    <?= csrf_meta() ?>
+    <meta name="site_url" content="<?= site_url() ?>">
+
     <title>ระบบยืนยันตัวตนในการเข้าใช้งานอินเตอร์เน็ต วิทยาลัยเทคนิคชัยภูมิ</title>
+
+    <?= $this->renderSection('head') ?>
 
     <!-- Vendors styles-->
     <link rel="stylesheet" href="<?= base_url('assets/coreui-template/vendors/simplebar/css/simplebar.css') ?>">
@@ -19,15 +24,11 @@
     <!-- CoreUI and necessary plugins-->
     <script src="<?= base_url('assets/coreui/js/coreui.bundle.min.js') ?>" defer></script>
     <script src="<?= base_url('assets/coreui-template/vendors/simplebar/js/simplebar.min.js') ?>" defer></script>
-    <!-- Plugins and scripts required by this view-->
-    <script src="<?= base_url('assets/coreui-template/vendors/chart.js/js/chart.min.js') ?>" defer></script>
-    <script src="<?= base_url('assets/coreui-template/vendors/@coreui/chartjs/js/coreui-chartjs.js') ?>" defer></script>
-    <script src="<?= base_url('assets/coreui-template/vendors/@coreui/utils/js/coreui-utils.js') ?>" defer></script>
-    <script src="<?= base_url('assets/coreui-template/js/main.js') ?>" defer></script>
 
+    <script src="<?= base_url('assets/js/vender/axios.min.js') ?>" defer></script>
     <script src="<?= base_url('assets/js/app.js') ?>" defer></script>
 
-    <?= $this->renderSection('head') ?>
+    <?= $this->renderSection('scripts') ?>
 
     <script src="<?= base_url('assets/alpinejs/dist/cdn.min.js') ?>" defer></script>
 
@@ -100,12 +101,17 @@
             </div>
         </header>
         <div class="body flex-grow-1 px-3">
-            <div class="container-lg">
-                <?= view_cell('AlertError', [
-                    'error' => $error ?? null
+            <main class="container-lg">
+                <?= view_cell('AlertFeedback', [
+                    'error'   => $error ?? null,
+                    'success' => $success ?? null,
+                    'warning' => $warning ?? null,
+                    'info'    => $info ?? null,
                 ]) ?>
                 <?= $this->renderSection('content') ?>
-            </div>
+                <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toastStack">
+                </div>
+            </main>
         </div>
         <footer class="footer">
             <div class="">2023 © เทคโนโลยีสารสนเทศ วิทยาลัยเทคนิคชัยภูมิ</div>

@@ -6,28 +6,28 @@ use CodeIgniter\Model;
 
 class Radcheck extends Model
 {
-    protected $DBGroup          = 'default';
-    protected $table            = 'radcheck';
-    protected $primaryKey       = 'id';
-    protected $returnType       = 'array';
-    protected $useSoftDeletes   = false;
-    protected $allowedFields    = ['value'];
+    protected $DBGroup        = 'default';
+    protected $table          = 'radcheck';
+    protected $primaryKey     = 'id';
+    protected $returnType     = 'array';
+    protected $useSoftDeletes = false;
+    protected $allowedFields  = ['value'];
 
     public function editPassword($data)
     {
         $check = $this->checkAuth($data['username'], $data['password']);
-        if (!$check) {
+        if (! $check) {
             return [
                 'status' => false,
-                'msg' => 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง',
+                'msg'    => 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง',
             ];
         }
 
         $set = $this->setPassword($data['username'], $data['new_password']);
-        if (!$set) {
+        if (! $set) {
             return [
                 'status' => false,
-                'msg' => 'ไม่สามารถเปลี่ยนรหัสผ่านได้กรุณาลองใหม่อีกครั้ง',
+                'msg'    => 'ไม่สามารถเปลี่ยนรหัสผ่านได้กรุณาลองใหม่อีกครั้ง',
             ];
         }
 

@@ -11,7 +11,7 @@ class EditPassword extends BaseController
         return view('portal/edit_password');
     }
 
-    public function action() 
+    public function action()
     {
         // log_message('info','test1234');
         $radcheckModel = model('App\Models\Radcheck');
@@ -19,20 +19,20 @@ class EditPassword extends BaseController
         $rules = [
             'username' => [
                 'label' => 'ชื่อผู้ใช้',
-                'rules' => 'required'
+                'rules' => 'required',
             ],
-            'password'             => [
+            'password' => [
                 'label' => 'รหัสผ่าน',
-                'rules' => 'required'
+                'rules' => 'required',
             ],
-            'new_password'             => [
+            'new_password' => [
                 'label' => 'รหัสผ่านใหม่',
-                'rules' => 'required|min_length[8]'
+                'rules' => 'required|min_length[8]',
             ],
-            'new_password_confirm'             => [
+            'new_password_confirm' => [
                 'label' => 'ยืนยันรหัสผ่านใหม่',
-                'rules' => 'required|matches[new_password]'
-            ]
+                'rules' => 'required|matches[new_password]',
+            ],
         ];
 
         if ($this->validate($rules)) {
@@ -42,14 +42,15 @@ class EditPassword extends BaseController
             }
 
             return view('portal/edit_password', [
-                'error' => $result['msg']
+                'error' => $result['msg'],
             ]);
         }
 
         return view('portal/edit_password');
     }
 
-    public function success() {
+    public function success()
+    {
         return view('portal/edit_password_success');
     }
 }

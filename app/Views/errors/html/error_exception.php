@@ -1,6 +1,6 @@
 <?php
-use Config\Services;
 use CodeIgniter\CodeIgniter;
+use Config\Services;
 
 $errorId = uniqid('error', true);
 ?>
@@ -41,7 +41,7 @@ $errorId = uniqid('error', true);
             <div class="source">
                 <?= static::highlightFile($file, $line, 15); ?>
             </div>
-        <?php endif; ?>
+        <?php endif ?>
     </div>
 
     <div class="container">
@@ -73,10 +73,10 @@ $errorId = uniqid('error', true);
                                 } else {
                                     echo esc(clean_path($row['file']) . ' : ' . $row['line']);
                                 }
-                                ?>
+                    ?>
                             <?php else: ?>
                                 {PHP internal code}
-                            <?php endif; ?>
+                            <?php endif ?>
 
                             <!-- Class/Method -->
                             <?php if (isset($row['class'])) : ?>
@@ -88,14 +88,14 @@ $errorId = uniqid('error', true);
                                         <table cellspacing="0">
 
                                         <?php
-                                        $params = null;
-                                        // Reflection by name is not available for closure function
-                                        if (substr($row['function'], -1) !== '}') {
-                                            $mirror = isset($row['class']) ? new ReflectionMethod($row['class'], $row['function']) : new ReflectionFunction($row['function']);
-                                            $params = $mirror->getParameters();
-                                        }
+                            $params = null;
+                                    // Reflection by name is not available for closure function
+                                    if (substr($row['function'], -1) !== '}') {
+                                        $mirror = isset($row['class']) ? new ReflectionMethod($row['class'], $row['function']) : new ReflectionFunction($row['function']);
+                                        $params = $mirror->getParameters();
+                                    }
 
-                                        foreach ($row['args'] as $key => $value) : ?>
+                                    foreach ($row['args'] as $key => $value) : ?>
                                             <tr>
                                                 <td><code><?= esc(isset($params[$key]) ? '$' . $params[$key]->name : "#{$key}") ?></code></td>
                                                 <td><pre><?= esc(print_r($value, true)) ?></pre></td>
@@ -106,12 +106,12 @@ $errorId = uniqid('error', true);
                                     </div>
                                 <?php else : ?>
                                     ()
-                                <?php endif; ?>
-                            <?php endif; ?>
+                                <?php endif ?>
+                            <?php endif ?>
 
                             <?php if (! isset($row['class']) && isset($row['function'])) : ?>
                                 &nbsp;&nbsp;&mdash;&nbsp;&nbsp;    <?= esc($row['function']) ?>()
-                            <?php endif; ?>
+                            <?php endif ?>
                         </p>
 
                         <!-- Source? -->
@@ -119,10 +119,10 @@ $errorId = uniqid('error', true);
                             <div class="source">
                                 <?= static::highlightFile($row['file'], $row['line']) ?>
                             </div>
-                        <?php endif; ?>
+                        <?php endif ?>
                     </li>
 
-                <?php endforeach; ?>
+                <?php endforeach ?>
                 </ol>
 
             </div>
@@ -153,10 +153,10 @@ $errorId = uniqid('error', true);
                                         <?= esc($value) ?>
                                     <?php else: ?>
                                         <pre><?= esc(print_r($value, true)) ?></pre>
-                                    <?php endif; ?>
+                                    <?php endif ?>
                                 </td>
                             </tr>
-                        <?php endforeach; ?>
+                        <?php endforeach ?>
                         </tbody>
                     </table>
 
@@ -183,13 +183,13 @@ $errorId = uniqid('error', true);
                                         <?= esc($value) ?>
                                     <?php else: ?>
                                         <pre><?= esc(print_r($value, true)) ?></pre>
-                                    <?php endif; ?>
+                                    <?php endif ?>
                                 </td>
                             </tr>
-                        <?php endforeach; ?>
+                        <?php endforeach ?>
                         </tbody>
                     </table>
-                <?php endif; ?>
+                <?php endif ?>
             </div>
 
             <!-- Request -->
@@ -258,10 +258,10 @@ $errorId = uniqid('error', true);
                                         <?= esc($value) ?>
                                     <?php else: ?>
                                         <pre><?= esc(print_r($value, true)) ?></pre>
-                                    <?php endif; ?>
+                                    <?php endif ?>
                                 </td>
                             </tr>
-                        <?php endforeach; ?>
+                        <?php endforeach ?>
                         </tbody>
                     </table>
 
@@ -273,7 +273,7 @@ $errorId = uniqid('error', true);
                         No $_GET, $_POST, or $_COOKIE Information to show.
                     </div>
 
-                <?php endif; ?>
+                <?php endif ?>
 
                 <?php $headers = $request->headers(); ?>
                 <?php if (! empty($headers)) : ?>
@@ -293,18 +293,18 @@ $errorId = uniqid('error', true);
                                 <td><?= esc($header->getName(), 'html') ?></td>
                                 <td><?= esc($header->getValueLine(), 'html') ?></td>
                             </tr>
-                        <?php endforeach; ?>
+                        <?php endforeach ?>
                         </tbody>
                     </table>
 
-                <?php endif; ?>
+                <?php endif ?>
             </div>
 
             <!-- Response -->
             <?php
                 $response = Services::response();
-                $response->setStatusCode(http_response_code());
-            ?>
+$response->setStatusCode(http_response_code());
+?>
             <div class="content" id="response">
                 <table>
                     <tr>
@@ -332,11 +332,11 @@ $errorId = uniqid('error', true);
                                 <td><?= esc($name, 'html') ?></td>
                                 <td><?= esc($response->getHeaderLine($name), 'html') ?></td>
                             </tr>
-                        <?php endforeach; ?>
+                        <?php endforeach ?>
                         </tbody>
                     </table>
 
-                <?php endif; ?>
+                <?php endif ?>
             </div>
 
             <!-- Files -->

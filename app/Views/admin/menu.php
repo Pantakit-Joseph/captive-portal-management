@@ -12,13 +12,13 @@
     </a>
     <ul class="nav-group-items">
         <li class="nav-item">
-            <a class="nav-link" href="<?= site_url('admin/issue/list') ?>">
+            <a class="nav-link" href="<?= site_url('admin/issues') ?>">
                 <i class="nav-icon"></i>
                 รายการปัญหา
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?= site_url('admin/issue/types') ?>">
+            <a class="nav-link" href="<?= site_url('admin/issues/types') ?>">
                 <i class="nav-icon"></i>
                 ประเภทของปัญหา
             </a>

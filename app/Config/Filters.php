@@ -22,7 +22,7 @@ class Filters extends BaseConfig
         'invalidchars'  => InvalidChars::class,
         'secureheaders' => SecureHeaders::class,
 
-        'login'         => \App\Filters\Login::class,
+        'login' => \App\Filters\Login::class,
     ];
 
     /**
@@ -33,7 +33,7 @@ class Filters extends BaseConfig
         'before' => [
             // 'honeypot',
             'csrf',
-            'invalidchars',
+            // 'invalidchars',
         ],
         'after' => [
             'toolbar',

@@ -2,8 +2,8 @@
 
 namespace App\Database\Migrations;
 
-use CodeIgniter\Database\RawSql;
 use CodeIgniter\Database\Migration;
+use CodeIgniter\Database\RawSql;
 
 class CreateAuthTables extends Migration
 {
@@ -14,19 +14,19 @@ class CreateAuthTables extends Migration
                 'type'           => 'int',
                 'constraint'     => 11,
                 'unsigned'       => true,
-                'auto_increment' => true
+                'auto_increment' => true,
             ],
             'username' => [
                 'type'       => 'varchar',
-                'constraint' => 30
+                'constraint' => 30,
             ],
             'password' => [
                 'type'       => 'varchar',
-                'constraint' => 255
+                'constraint' => 255,
             ],
             'user_type' => [
                 'type'       => 'varchar',
-                'constraint' => 30
+                'constraint' => 30,
             ],
             'status' => [
                 'type'       => 'int',
@@ -35,15 +35,15 @@ class CreateAuthTables extends Migration
             ],
             'created_at' => [
                 'type' => 'datetime',
-                'null' => true
+                'null' => true,
             ],
-            'updated_at'     => [
+            'updated_at' => [
                 'type' => 'datetime',
-                'null' => true
+                'null' => true,
             ],
-            'deleted_at'     => [
+            'deleted_at' => [
                 'type' => 'datetime',
-                'null' => true
+                'null' => true,
             ],
         ]);
         $this->forge->addPrimaryKey('id');
@@ -52,11 +52,12 @@ class CreateAuthTables extends Migration
 
         $this->db->table('app_users')
             ->insert([
-                'username' => 'admin',
-                'password' => password_hash('Admin_123456', PASSWORD_DEFAULT),
-                'user_type' => 'admin',
-                'status' => 1,
-                'created_at' => new RawSql('NOW()')
+                'username'   => 'admin',
+                'password'   => password_hash('Admin_123456', PASSWORD_DEFAULT),
+                'user_type'  => 'admin',
+                'status'     => 1,
+                'created_at' => new RawSql('NOW()'),
+                'updated_at' => new RawSql('NOW()'),
             ]);
     }
 

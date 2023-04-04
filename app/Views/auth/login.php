@@ -27,8 +27,11 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="card-group d-block d-md-flex row">
-                        <?= view_cell('AlertError', [
-                            'errors' => $error ?? null
+                        <?= view_cell('AlertFeedback', [
+                            'error'   => $error ?? null,
+                            'success' => $success ?? null,
+                            'warning' => $warning ?? null,
+                            'info'    => $info ?? null,
                         ]) ?>
                         <div class="card col-md-7 p-4 mb-0">
                             <div class="card-body">

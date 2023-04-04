@@ -36,6 +36,7 @@ $routes->group('portal', ['namespace' => 'App\Controllers\Portal'], static funct
     $routes->post('edit-password', 'EditPassword::action');
     $routes->get('edit-password/success', 'EditPassword::success');
     $routes->get('issues/new', 'IssuesNew::index');
+    $routes->post('issues/new', 'IssuesNew::action');
 });
 
 $routes->group('auth', static function ($routes) {
@@ -48,14 +49,24 @@ $routes->group(
     'admin',
     [
         'namespace' => 'App\Controllers\Admin',
-        'filter' => 'login:admin'
+        'filter'    => 'login:admin',
     ],
     static function ($routes) {
         $routes->addRedirect('/', site_url('admin/home'));
         $routes->get('home', 'Home::index');
+
+        $routes->get('issues', 'Issues\Issues::index');
+        $routes->post('issues/api/(:num)/close', 'Issues\Issues::apiClose/$1');
+        $routes->post('issues/api/(:num)/open', 'Issues\Issues::apiOpen/$1');
+
+        $routes->get('issues/types', 'Issues\Types::index');
+        $routes->post('issues/types/api', 'Issues\Types::apiAdd');
+        $routes->put('issues/types/api/(:num)', 'Issues\Types::apiEdit/$1');
+        $routes->delete('issues/types/api/(:num)', 'Issues\Types::apiDelete/$1');
+        $routes->delete('issues/types/api/(:num)/purge', 'Issues\Types::apiPurgeDelete/$1');
+        $routes->post('issues/types/api/(:num)/restore', 'Issues\Types::apiPurgeRestore/$1');
     }
 );
-
 
 $routes->get('/test/app', 'Test::app');
 
