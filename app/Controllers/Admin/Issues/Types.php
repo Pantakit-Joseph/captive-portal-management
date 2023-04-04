@@ -46,7 +46,7 @@ class Types extends BaseController
             ],
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return $this->fail([
                 'token'  => $token,
                 'errors' => $this->validator->getErrors(),
@@ -56,7 +56,7 @@ class Types extends BaseController
         $update    = $this->issueTypesModel->insert([
             'type_name' => $type_name,
         ]);
-        if (!$update) {
+        if (! $update) {
             return $this->fail([
                 'token'  => $token,
                 'errors' => $this->issueTypesModel->errors(),
@@ -81,7 +81,7 @@ class Types extends BaseController
             ],
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return $this->fail([
                 'token'  => csrf_hash(),
                 'errors' => $this->validator->getErrors(),
@@ -91,7 +91,7 @@ class Types extends BaseController
         $update    = $this->issueTypesModel->update($id, [
             'type_name' => $type_name,
         ]);
-        if (!$update) {
+        if (! $update) {
             return $this->fail([
                 'token'  => csrf_hash(),
                 'errors' => $this->issueTypesModel->errors(),
@@ -111,7 +111,7 @@ class Types extends BaseController
     public function apiDelete($id, $purge = false)
     {
         $token = csrf_hash();
-        if (!$this->issueTypesModel->delete($id, $purge)) {
+        if (! $this->issueTypesModel->delete($id, $purge)) {
             return $this->fail([
                 'token'  => $token,
                 'errors' => $this->issueTypesModel->errors(),
@@ -122,10 +122,11 @@ class Types extends BaseController
             'token' => $token,
         ]);
     }
+
     public function apiPurgeRestore($id)
     {
         $token = csrf_hash();
-        if (!$this->issueTypesModel->update($id, ['deleted_at' => NULL])) {
+        if (! $this->issueTypesModel->update($id, ['deleted_at' => null])) {
             return $this->fail([
                 'token'  => $token,
                 'errors' => $this->issueTypesModel->errors(),

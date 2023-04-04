@@ -19,12 +19,13 @@ class Issues extends BaseController
     public function index()
     {
         $filter = [
-            'per_page' =>  (int) $this->request->getGet('per_page') ?: 10,
-            'search' => trim((string) $this->request->getGet('search')),
-            'status' => $this->request->getGet('status') ?? 'open',
+            'per_page' => (int) $this->request->getGet('per_page') ?: 10,
+            'search'   => trim((string) $this->request->getGet('search')),
+            'status'   => $this->request->getGet('status') ?? 'open',
         ];
+
         return view('admin/issues/issues', [
-            'issues'  => $this->issuesModel->getAllPaginate($filter, $filter['per_page']),
+            'issues' => $this->issuesModel->getAllPaginate($filter, $filter['per_page']),
             'pager'  => $this->issuesModel->pager,
             'filter' => $filter,
         ]);
@@ -33,18 +34,18 @@ class Issues extends BaseController
     public function apiClose($id)
     {
         $token = csrf_hash();
-        if (!$id) {
+        if (! $id) {
             return $this->fail([
-                'token'  => $token,
+                'token' => $token,
             ]);
         }
 
         $update = $this->issuesModel->update($id, [
-            'status' => '0',
+            'status'    => '0',
             'closed_by' => user_id(),
         ]);
 
-        if (!$update) {
+        if (! $update) {
             return $this->fail([
                 'token'  => $token,
                 'errors' => $this->issuesModel->errors(),
@@ -59,18 +60,18 @@ class Issues extends BaseController
     public function apiOpen($id)
     {
         $token = csrf_hash();
-        if (!$id) {
+        if (! $id) {
             return $this->fail([
-                'token'  => $token,
+                'token' => $token,
             ]);
         }
 
         $update = $this->issuesModel->update($id, [
-            'status' => '1',
-            'closed_by' => null
+            'status'    => '1',
+            'closed_by' => null,
         ]);
 
-        if (!$update) {
+        if (! $update) {
             return $this->fail([
                 'token'  => $token,
                 'errors' => $this->issuesModel->errors(),

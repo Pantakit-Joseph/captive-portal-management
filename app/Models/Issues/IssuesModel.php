@@ -55,15 +55,14 @@ class IssuesModel extends Model
         $this->allFilter($filter);
 
         $issues = $this->paginate(...$args);
-        if (empty($issues))
+        if (empty($issues)) {
             return [];
+        }
 
         $issue_ids = array_column($issues, 'id');
-        $files = $this->getFilesIn($issue_ids);
+        $files     = $this->getFilesIn($issue_ids);
 
-        $data = $this->mergeIssuesFiles($issues, $files);
-
-        return $data;
+        return $this->mergeIssuesFiles($issues, $files);
     }
 
     private function allJoin()
@@ -71,7 +70,7 @@ class IssuesModel extends Model
         $select = [
             'app_issues.*',
             'app_issue_types.type_name',
-            'user_closed.username AS closed_username'
+            'user_closed.username AS closed_username',
         ];
         $selectSQL = implode(', ', $select);
         $this->select($selectSQL);
@@ -83,16 +82,18 @@ class IssuesModel extends Model
     {
         $this->allSearch($filter['search']);
 
-        if ($filter['status'] === 'close')
+        if ($filter['status'] === 'close') {
             $this->where('app_issues.status', 0);
-        else
+        } else {
             $this->where('app_issues.status', 1);
+        }
     }
 
     private function allSearch($search)
     {
-        if (empty($search))
+        if (empty($search)) {
             return;
+        }
 
         $this->groupStart();
         $this->orLike('app_issues.id', $search);
@@ -106,26 +107,28 @@ class IssuesModel extends Model
         $this->groupEnd();
     }
 
-
     private function getFilesIn($issue_ids)
     {
-        if (empty($issue_ids))
+        if (empty($issue_ids)) {
             return [];
+        }
 
         $issueFilesModel = model('App\Models\Issues\IssueFilesModel');
+
         return $issueFilesModel->whereIn('issue_id', $issue_ids)->findAll();
     }
 
     private function mergeIssuesFiles($issues, $files)
     {
         $files_arr = [];
+
         foreach ($files as $file) {
-            $issue_id = $file['issue_id'];
+            $issue_id               = $file['issue_id'];
             $files_arr[$issue_id][] = $file['file'];
         }
 
         foreach ($issues as $key => $issue) {
-            $issue_id = $issue['id'];
+            $issue_id              = $issue['id'];
             $issues[$key]['files'] = $files_arr[$issue_id] ?? [];
         }
 

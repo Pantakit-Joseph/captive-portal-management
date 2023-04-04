@@ -19,14 +19,14 @@ class IssuesNew extends BaseController
         $issuesModel     = model('App\Models\Issues\IssuesModel');
         $issueFilesModel = model('App\Models\Issues\IssueFilesModel');
 
-        if (!$this->actionValidate()) {
+        if (! $this->actionValidate()) {
             return view('portal/issues_new', [
                 'data' => $this->getDataPage(),
             ]);
         }
 
         $data = $this->actionGetData();
-        if (!$issuesModel->insert($data)) {
+        if (! $issuesModel->insert($data)) {
             return view('portal/issues_new', [
                 'error' => $issuesModel->errors(),
                 'data'  => $this->getDataPage(),
@@ -35,8 +35,8 @@ class IssuesNew extends BaseController
 
         $issue_id   = $issuesModel->getInsertID();
         $files_data = $this->actionUploadFiles($issue_id);
-        if (!empty($files_data)) {
-            if (!$issueFilesModel->insertBatch($files_data)) {
+        if (! empty($files_data)) {
+            if (! $issueFilesModel->insertBatch($files_data)) {
                 return view('portal/issues_new', [
                     'error' => $issueFilesModel->errors(),
                     'data'  => $this->getDataPage(),
@@ -116,17 +116,17 @@ class IssuesNew extends BaseController
     private function actionUploadFiles($issue_id)
     {
         $data = [];
-        if (!$files = $this->request->getFiles()) {
+        if (! $files = $this->request->getFiles()) {
             return;
         }
 
         foreach ($files['file'] as $img) {
-            if ($img->isValid() && !$img->hasMoved()) {
+            if ($img->isValid() && ! $img->hasMoved()) {
                 $folderName = rtrim(date('Ymd'), '/') . '/';
                 $folderPath = FCPATH . 'storage/' . $folderName;
-                $fileName = $img->getRandomName();
-                $path = $img->move($folderPath, $fileName);
-                $data[] = [
+                $fileName   = $img->getRandomName();
+                $path       = $img->move($folderPath, $fileName);
+                $data[]     = [
                     'issue_id' => $issue_id,
                     'file'     => 'storage/' . $folderName . $fileName,
                 ];
