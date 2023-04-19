@@ -55,6 +55,10 @@ $routes->group(
         $routes->addRedirect('/', site_url('admin/home'));
         $routes->get('home', 'Home::index');
 
+        $routes->get('users', 'Users\Users::index');
+        $routes->get('users/guests', 'Users\Guests::index');
+        $routes->post('users/guests/api', 'Users\Guests::apiAdd');
+
         $routes->get('issues', 'Issues\Issues::index');
         $routes->post('issues/api/(:num)/close', 'Issues\Issues::apiClose/$1');
         $routes->post('issues/api/(:num)/open', 'Issues\Issues::apiOpen/$1');
@@ -69,6 +73,7 @@ $routes->group(
 );
 
 $routes->get('/test/app', 'Test::app');
+$routes->get('/test', 'Test::index');
 
 /*
  * --------------------------------------------------------------------

@@ -11,7 +11,12 @@ class Radcheck extends Model
     protected $primaryKey     = 'id';
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
-    protected $allowedFields  = ['value'];
+    protected $allowedFields  = [
+        'username',
+        'attribute',
+        'op',
+        'value',
+    ];
 
     public function editPassword($data)
     {

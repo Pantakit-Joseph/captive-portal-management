@@ -59,6 +59,13 @@
 		tokenEl.setAttribute("content", token);
 		axiosInstance();
 	};
+
+	window.tokenFail = () => {
+		AppToastAlert(
+			"การกระทำที่คุณร้องขอไม่ได้รับอนุญาต <br>กรุณาโหลดใหม่",
+			"danger"
+		);
+	};
 })();
 
 (function () {
@@ -66,10 +73,10 @@
 		let msgHtml = "";
 		if (typeof messages === "string" || messages instanceof String) {
 			msgHtml = messages;
-		} else if (Array.isArray(messages)) {
+		} else if (typeof messages === "object" || Array.isArray(messages)) {
 			msgHtml = `<ul class="m-0 ps-3">`;
-			for (let text of messages) {
-				msgHtml += `<li>${text}</li>`;
+			for (let key in messages) {
+				msgHtml += `<li>${messages[key]}</li>`;
 			}
 			msgHtml += `</ul>`;
 		}
