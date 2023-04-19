@@ -61,7 +61,7 @@ class Guests extends BaseController
         ]);
     }
 
-    private function usersGenerate($numberofusers, $prefix, $expires)
+    private function usersGenerate($numberofusers, $prefix)
     {
         $usernames = $this->usersGenerateUsername($numberofusers, $prefix);
         $passwords = $this->usersGeneratePasswords($numberofusers);
