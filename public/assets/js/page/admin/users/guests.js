@@ -17,7 +17,7 @@ document.addEventListener("alpine:init", () => {
 				enableTime: true,
 				altInput: true,
 				altFormat: "j F Y H:i",
-				// minDate: "tody",
+				minDate: "today",
 				time_24hr: true,
 			});
 		},
