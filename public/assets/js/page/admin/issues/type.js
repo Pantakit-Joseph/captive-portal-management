@@ -94,7 +94,6 @@ document.addEventListener("alpine:init", () => {
 			if (this.purgeDelete) this.url += "/purge";
 		},
 		submit() {
-			console.log(this.url);
 			this.load = true;
 			appAxios
 				.delete(this.url)

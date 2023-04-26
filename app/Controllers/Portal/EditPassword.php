@@ -13,7 +13,6 @@ class EditPassword extends BaseController
 
     public function action()
     {
-        // log_message('info','test1234');
         $radcheckModel = model('App\Models\Radcheck');
 
         $rules = [

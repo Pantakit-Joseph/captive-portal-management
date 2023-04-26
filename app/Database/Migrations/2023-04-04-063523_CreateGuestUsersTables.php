@@ -24,6 +24,10 @@ class CreateGuestUsersTables extends Migration
                 'constraint' => 255,
                 'null'       => true,
             ],
+            'expire_at' => [
+                'type' => 'datetime',
+                'null' => true,
+            ],
             'created_at' => [
                 'type' => 'datetime',
                 'null' => true,

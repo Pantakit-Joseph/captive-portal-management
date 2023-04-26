@@ -1,4 +1,16 @@
 "use strict";
+
+(function () {
+	flatpickr.localize(flatpickr.l10ns.th);
+	flatpickr.setDefaults({
+		altInput: true,
+		altFormat: "j F Y",
+		time_24hr: true,
+		defaultHour: 0,
+	});
+	flatpickr(".flatpickr");
+})();
+
 (function () {
 	window.html = (strings, ...values) => String.raw({ raw: strings }, ...values);
 
@@ -12,7 +24,12 @@
 					placement: "bottom",
 				})
 		);
-		tooltipList;
+		window.tooltips = {
+			instanceList: tooltipList,
+			closeAll() {
+				this.instanceList.forEach((tooltip) => tooltip.hide());
+			},
+		};
 	});
 })();
 
@@ -133,4 +150,12 @@
 
 	window.getAppAlert = getAppAlert;
 	window.AppToastAlert = AppToastAlert;
+})();
+
+(function () {
+	window.Swal = Swal.mixin({
+		willOpen() {
+			tooltips.closeAll();
+		},
+	});
 })();

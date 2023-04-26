@@ -12,8 +12,8 @@
     <title>ระบบยืนยันตัวตนในการเข้าใช้งานอินเตอร์เน็ต วิทยาลัยเทคนิคชัยภูมิ</title>
 
     <?= $this->renderSection('head') ?>
-
-    <!-- Vendors styles-->
+    <link rel="stylesheet" href="<?= base_url('assets/flatpickr/flatpickr.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/sweetalert2/sweetalert2.min.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/coreui-template/vendors/simplebar/css/simplebar.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/coreui-template/css/vendors/simplebar.css') ?>">
     <!-- Main styles for this application-->
@@ -25,6 +25,9 @@
     <script src="<?= base_url('assets/coreui/js/coreui.bundle.min.js') ?>" defer></script>
     <script src="<?= base_url('assets/coreui-template/vendors/simplebar/js/simplebar.min.js') ?>" defer></script>
 
+    <script src="<?= base_url('assets/flatpickr/flatpickr.min.js') ?>" defer></script>
+    <script src="<?= base_url('assets/flatpickr/l10n/th.js') ?>" defer></script>
+    <script src="<?= base_url('assets/sweetalert2/sweetalert2.min.js') ?>" defer></script>
     <script src="<?= base_url('assets/js/vender/axios.min.js') ?>" defer></script>
     <script src="<?= base_url('assets/js/app.js') ?>" defer></script>
 

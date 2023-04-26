@@ -15,6 +15,7 @@ class GuestUsersModel extends Model
     protected $protectFields    = true;
     protected $allowedFields    = [
         'username',
+        'expire_at',
         'description',
     ];
 
@@ -24,6 +25,39 @@ class GuestUsersModel extends Model
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
+
+    public function filter($filter)
+    {
+        $this->select('app_guest_users.*, radcheck.value AS password');
+        $this->join(
+            'radcheck',
+            'radcheck.username=app_guest_users.username AND '
+                . "radcheck.attribute = 'Cleartext-Password'",
+            'left'
+        );
+        if (! empty($filter['search'])) {
+            $this->search($filter['search']);
+        }
+
+        if (isset($filter['status']) && $filter['status'] === 'trashed') {
+            $this->onlyDeleted();
+        }
+
+        return $this;
+    }
+
+    private function search($search)
+    {
+        $search = trim($search);
+        $this->groupStart();
+        $this->orLike('app_guest_users.id', $search);
+        $this->orLike('app_guest_users.username', $search);
+        $this->orLike('radcheck.value', $search);
+        $this->orLike('created_at', $search);
+        $this->orLike('updated_at', $search);
+        $this->orLike('deleted_at', $search);
+        $this->groupEnd();
+    }
 
     public function isUser($username)
     {
@@ -57,9 +91,12 @@ class GuestUsersModel extends Model
 
     private function insertsGuestUsersTable($usersData)
     {
+        log_message('debug', var_export($usersData, true));
         $data = array_map(static function ($users) {
             return [
-                'username' => $users['username'],
+                'username'    => $users['username'],
+                'expire_at'   => $users['expire'],
+                'description' => $users['description'],
             ];
         }, $usersData);
 

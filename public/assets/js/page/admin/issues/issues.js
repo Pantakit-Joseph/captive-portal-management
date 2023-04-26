@@ -39,7 +39,6 @@ document.addEventListener("alpine:init", () => {
 					location.reload();
 				})
 				.catch((error) => {
-					console.log(error);
 					updateToken(error.response.data.token);
 					this.load = false;
 					AppToastAlert(

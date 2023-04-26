@@ -58,6 +58,7 @@ $routes->group(
         $routes->get('users', 'Users\Users::index');
         $routes->get('users/guests', 'Users\Guests::index');
         $routes->post('users/guests/api', 'Users\Guests::apiAdd');
+        $routes->delete('users/guests/api/(:any)', 'Users\Guests::apiDelete/$1');
 
         $routes->get('issues', 'Issues\Issues::index');
         $routes->post('issues/api/(:num)/close', 'Issues\Issues::apiClose/$1');

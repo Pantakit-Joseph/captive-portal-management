@@ -30,9 +30,8 @@ class IssueTypesModel extends Model
         if (! empty($filter['search'])) {
             $this->search($filter['search']);
         }
-        log_message('debug', $filter['status']);
+
         if (isset($filter['status']) && $filter['status'] === 'trashed') {
-            log_message('debug', 'withDeleted: true');
             $this->onlyDeleted();
         }
 

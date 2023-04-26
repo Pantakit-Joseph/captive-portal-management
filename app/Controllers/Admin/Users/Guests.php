@@ -10,16 +10,56 @@ class Guests extends BaseController
     use ResponseTrait;
 
     private $guestUsersModel;
+    private $radcheckModel;
 
     public function __construct()
     {
         helper('text');
         $this->guestUsersModel = model('App\Models\Users\GuestUsersModel');
+        $this->radcheckModel   = model('App\Models\Radcheck');
     }
 
     public function index()
     {
-        return view('admin/users/guests');
+        $filter = [
+            'per_page' => (int) $this->request->getGet('per_page') ?: 10,
+            'search'   => trim((string) $this->request->getGet('search')),
+            'status'   => $this->request->getGet('status') ?? 'published',
+        ];
+
+        return view(
+            'admin/users/guests',
+            [
+                'guestUsers' => $this->guestUsersModel->filter($filter)->paginate($filter['per_page']),
+                'pager'      => $this->guestUsersModel->pager,
+                'filter'     => $filter,
+            ]
+        );
+    }
+
+    public function apiDelete($username)
+    {
+        $token        = csrf_hash();
+        $responseFail = function () use ($token) {
+            return $this->fail([
+                'token'  => $token,
+                'errors' => 'ไม่สามารถลบผู้ใช้ได้ กรุณาลองใหม่อีกครั้ง',
+            ]);
+        };
+
+        $deleteFromRadcheck = $this->radcheckModel->where('username', $username)->delete();
+        if (! $deleteFromRadcheck) {
+            return $responseFail;
+        }
+
+        $deleteFromGuestUsers = $this->guestUsersModel->where('username', $username)->delete();
+        if (! $deleteFromGuestUsers) {
+            return $responseFail;
+        }
+
+        return $this->respondDeleted([
+            'token' => $token,
+        ]);
     }
 
     public function apiAdd()
@@ -35,6 +75,14 @@ class Guests extends BaseController
                 'label' => 'คำนำหน้าชื่อผู้ใช้',
                 'rules' => 'max_length[20]',
             ],
+            'expire' => [
+                'label' => 'วันหมดอายุ',
+                'rules' => 'permit_empty|valid_date',
+            ],
+            'description' => [
+                'label' => 'คำอธิบาย',
+                'rules' => 'permit_empty|max_length[255]',
+            ],
         ];
 
         if (! $this->validate($rules)) {
@@ -45,9 +93,10 @@ class Guests extends BaseController
         }
         $numberofusers = $this->request->getVar('numberofusers');
         $prefix        = $this->request->getVar('prefix');
-        $expires       = $this->request->getVar('expires');
+        $expire        = $this->request->getVar('expire');
+        $description   = $this->request->getVar('description');
 
-        $users = $this->usersGenerate($numberofusers, $prefix, $expires);
+        $users = $this->usersGenerate($numberofusers, $prefix, $expire, $description);
         if (! $users) {
             return $this->fail([
                 'token'  => $token,
@@ -61,12 +110,12 @@ class Guests extends BaseController
         ]);
     }
 
-    private function usersGenerate($numberofusers, $prefix)
+    private function usersGenerate($numberofusers, $prefix, $expire, $description)
     {
         $usernames = $this->usersGenerateUsername($numberofusers, $prefix);
         $passwords = $this->usersGeneratePasswords($numberofusers);
 
-        $users = $this->mapUsernamesPasswords($usernames, $passwords);
+        $users = $this->mapUsernamesPasswords($usernames, $passwords, $expire, $description);
 
         $createUsers = $this->guestUsersModel->createUsers($users);
         if (! $createUsers) {
@@ -118,12 +167,14 @@ class Guests extends BaseController
         return $passwords;
     }
 
-    private function mapUsernamesPasswords($usernames, $passwords)
+    private function mapUsernamesPasswords($usernames, $passwords, $expire, $description)
     {
-        return array_map(static function ($username, $password) {
+        return array_map(static function ($username, $password) use ($expire, $description) {
             return [
-                'username' => $username,
-                'password' => $password,
+                'username'    => $username,
+                'password'    => $password,
+                'expire'      => $expire,
+                'description' => $description,
             ];
         }, $usernames, $passwords);
     }
