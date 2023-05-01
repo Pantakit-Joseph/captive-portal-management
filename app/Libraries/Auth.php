@@ -2,6 +2,8 @@
 
 namespace App\Libraries;
 
+use App\Models\Auth\UserModel;
+
 class Auth
 {
     public $user;
@@ -10,13 +12,13 @@ class Auth
 
     public function __construct()
     {
-        $this->userModel = model('Auth/UserModel');
+        $this->userModel = model(UserModel::class);
     }
 
     public function login($username, $password)
     {
         $user = $this->userModel->getByUsername($username);
-        if (!isset($user)) {
+        if (! isset($user)) {
             return [
                 'success' => false,
                 'reason'  => 'ไม่พบบัญชีผู้ใช้',
@@ -49,13 +51,13 @@ class Auth
     public function checkLogin($user_types = null)
     {
         $user_id = session()->get('user_id');
-        if (!isset($user_id)) {
+        if (! isset($user_id)) {
             return false;
         }
 
         $user       = $this->userModel->find($user_id);
         $this->user = $user;
-        if (!isset($user)) {
+        if (! isset($user)) {
             return false;
         }
 
@@ -65,7 +67,7 @@ class Auth
         }
 
         if ($user_types !== null) {
-            if (!in_array($user['user_type'], $user_types, true)) {
+            if (! in_array($user['user_type'], $user_types, true)) {
                 return false;
             }
         }

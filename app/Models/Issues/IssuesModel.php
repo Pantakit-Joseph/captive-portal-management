@@ -113,7 +113,7 @@ class IssuesModel extends Model
             return [];
         }
 
-        $issueFilesModel = model('App\Models\Issues\IssueFilesModel');
+        $issueFilesModel = model(IssueFilesModel::class);
 
         return $issueFilesModel->whereIn('issue_id', $issue_ids)->findAll();
     }

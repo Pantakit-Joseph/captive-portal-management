@@ -3,6 +3,8 @@
 namespace App\Controllers\Admin\Users;
 
 use App\Controllers\BaseController;
+use App\Models\Auth\Radcheck;
+use App\Models\Auth\Users\GuestUsersModel;
 use CodeIgniter\API\ResponseTrait;
 
 class Guests extends BaseController
@@ -15,8 +17,8 @@ class Guests extends BaseController
     public function __construct()
     {
         helper('text');
-        $this->guestUsersModel = model('App\Models\Users\GuestUsersModel');
-        $this->radcheckModel   = model('App\Models\Radcheck');
+        $this->guestUsersModel = model(GuestUsersModel::class);
+        $this->radcheckModel   = model(Radcheck::class);
     }
 
     public function index()

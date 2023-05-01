@@ -3,6 +3,7 @@
 namespace App\Controllers\Portal;
 
 use App\Controllers\BaseController;
+use App\Models\Radcheck;
 
 class EditPassword extends BaseController
 {
@@ -13,7 +14,7 @@ class EditPassword extends BaseController
 
     public function action()
     {
-        $radcheckModel = model('App\Models\Radcheck');
+        $radcheckModel = model(Radcheck::class);
 
         $rules = [
             'username' => [

@@ -3,6 +3,9 @@
 namespace App\Controllers\Portal;
 
 use App\Controllers\BaseController;
+use App\Models\Issues\issueFilesModel;
+use App\Models\Issues\IssuesModel;
+use App\Models\Issues\IssueTypesModel;
 
 class IssuesNew extends BaseController
 {
@@ -16,8 +19,8 @@ class IssuesNew extends BaseController
 
     public function action()
     {
-        $issuesModel     = model('App\Models\Issues\IssuesModel');
-        $issueFilesModel = model('App\Models\Issues\IssueFilesModel');
+        $issuesModel     = model(IssuesModel::class);
+        $issueFilesModel = model(issueFilesModel::class);
 
         if (! $this->actionValidate()) {
             return view('portal/issues_new', [
@@ -52,7 +55,7 @@ class IssuesNew extends BaseController
 
     private function getDataPage()
     {
-        $IssueTypesModel = model('App\Models\Issues\IssueTypesModel');
+        $IssueTypesModel = model(IssueTypesModel::class);
 
         return (object) [
             'types' => $IssueTypesModel->findAll(),

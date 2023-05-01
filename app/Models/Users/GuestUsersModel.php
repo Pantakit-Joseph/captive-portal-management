@@ -2,6 +2,7 @@
 
 namespace App\Models\Users;
 
+use App\Models\Radcheck;
 use CodeIgniter\Model;
 
 class GuestUsersModel extends Model
@@ -105,7 +106,7 @@ class GuestUsersModel extends Model
 
     private function insertsRadcheckTable($usersData)
     {
-        $radcheckModel = model('App\Models\Radcheck');
+        $radcheckModel = model(Radcheck::class);
         $data          = array_map(static function ($users) {
             return [
                 'username'  => $users['username'],

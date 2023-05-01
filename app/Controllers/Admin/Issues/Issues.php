@@ -3,6 +3,7 @@
 namespace App\Controllers\Admin\Issues;
 
 use App\Controllers\BaseController;
+use App\Models\Issues\IssuesModel;
 use CodeIgniter\API\ResponseTrait;
 
 class Issues extends BaseController
@@ -13,7 +14,7 @@ class Issues extends BaseController
 
     public function __construct()
     {
-        $this->issuesModel = model('App\Models\Issues\IssuesModel');
+        $this->issuesModel = model(IssuesModel::class);
     }
 
     public function index()
