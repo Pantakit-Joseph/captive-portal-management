@@ -3,7 +3,7 @@
 namespace App\Controllers\Portal;
 
 use App\Controllers\BaseController;
-use App\Models\Issues\issueFilesModel;
+use App\Models\Issues\IssueFilesModel;
 use App\Models\Issues\IssuesModel;
 use App\Models\Issues\IssueTypesModel;
 
@@ -20,7 +20,7 @@ class IssuesNew extends BaseController
     public function action()
     {
         $issuesModel     = model(IssuesModel::class);
-        $issueFilesModel = model(issueFilesModel::class);
+        $issueFilesModel = model(IssueFilesModel::class);
 
         if (! $this->actionValidate()) {
             return view('portal/issues_new', [
