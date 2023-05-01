@@ -4,7 +4,7 @@ namespace App\Controllers\Admin\Users;
 
 use App\Controllers\BaseController;
 use App\Models\Auth\Radcheck;
-use App\Models\Auth\Users\GuestUsersModel;
+use App\Models\Users\GuestUsersModel;
 use CodeIgniter\API\ResponseTrait;
 
 class Guests extends BaseController
