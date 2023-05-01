@@ -18,7 +18,7 @@ class Guests extends BaseController
     {
         helper('text');
         $this->guestUsersModel = model(GuestUsersModel::class);
-        d($this->guestUsersModel);
+        dd($this->guestUsersModel);
         $this->radcheckModel   = model(Radcheck::class);
     }
 
