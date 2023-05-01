@@ -37,7 +37,7 @@ class EditPassword extends BaseController
         ];
 
         if ($this->validate($rules)) {
-            $username        = $this->request->getGet('per_page');
+            $username        = $this->request->getPost('username');
             $guestUsersModel = model(GuestUsersModel::class);
             if ($guestUsersModel->isGuestUser($username)) {
                 return view('portal/edit_password', [
