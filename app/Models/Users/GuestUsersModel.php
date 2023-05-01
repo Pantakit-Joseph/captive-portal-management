@@ -78,6 +78,13 @@ class GuestUsersModel extends Model
         return ! (empty($builder->union($union)->get()->getRow()));
     }
 
+    public function isGuestUser($username)
+    {
+        $user = $this->where('username', $username)->first();
+
+        return ! (empty($user));
+    }
+
     public function createUsers($usersData)
     {
         $insertsGuestUsersTable = $this->insertsGuestUsersTable($usersData);

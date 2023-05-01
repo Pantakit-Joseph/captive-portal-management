@@ -50,12 +50,12 @@ class Guests extends BaseController
         };
 
         $deleteFromRadcheck = $this->radcheckModel->where('username', $username)->delete();
-        if (!$deleteFromRadcheck) {
+        if (! $deleteFromRadcheck) {
             return $responseFail;
         }
 
         $deleteFromGuestUsers = $this->guestUsersModel->where('username', $username)->delete();
-        if (!$deleteFromGuestUsers) {
+        if (! $deleteFromGuestUsers) {
             return $responseFail;
         }
 
@@ -87,7 +87,7 @@ class Guests extends BaseController
             ],
         ];
 
-        if (!$this->validate($rules)) {
+        if (! $this->validate($rules)) {
             return $this->fail([
                 'token'  => $token,
                 'errors' => $this->validator->getErrors(),
@@ -99,7 +99,7 @@ class Guests extends BaseController
         $description   = $this->request->getVar('description');
 
         $users = $this->usersGenerate($numberofusers, $prefix, $expire, $description);
-        if (!$users) {
+        if (! $users) {
             return $this->fail([
                 'token'  => $token,
                 'errors' => 'ไม่สามารถสร้างผู้ใช้ได้ กรุณาลองใหม่อีกครั้ง',
@@ -120,7 +120,7 @@ class Guests extends BaseController
         $users = $this->mapUsernamesPasswords($usernames, $passwords, $expire, $description);
 
         $createUsers = $this->guestUsersModel->createUsers($users);
-        if (!$createUsers) {
+        if (! $createUsers) {
             return false;
         }
 

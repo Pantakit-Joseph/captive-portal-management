@@ -4,6 +4,7 @@ namespace App\Controllers\Portal;
 
 use App\Controllers\BaseController;
 use App\Models\Radcheck;
+use App\Models\Users\GuestUsersModel;
 
 class EditPassword extends BaseController
 {
@@ -36,6 +37,14 @@ class EditPassword extends BaseController
         ];
 
         if ($this->validate($rules)) {
+            $username        = $this->request->getGet('per_page');
+            $guestUsersModel = model(GuestUsersModel::class);
+            if ($guestUsersModel->isGuestUser($username)) {
+                return view('portal/edit_password', [
+                    'error' => $username . ' ไม่สามารถเปลี่ยนรหัสผ่านได้',
+                ]);
+            }
+
             $result = $radcheckModel->editPassword($this->request->getPost());
             if ($result['status']) {
                 return redirect()->to('/portal/edit-password/success');
